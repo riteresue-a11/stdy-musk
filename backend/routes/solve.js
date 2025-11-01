@@ -83,8 +83,8 @@ router.post('/text', async (req, res) => {
     // Generate prompt based on subject
     const prompt = generatePrompt(question, subject);
 
-    // Call Gemini API
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    // ✅ 修正：gemini-1.5-flash → gemini-2.0-flash-exp
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
@@ -143,8 +143,8 @@ router.post('/image', async (req, res) => {
     // Extract base64 data
     const base64Data = imageData.replace(/^data:image\/\w+;base64,/, '');
 
-    // First, extract text from image
-    const visionModel = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    // ✅ 修正：gemini-pro → gemini-2.0-flash-exp
+    const visionModel = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
     
     const imageParts = [
       {
@@ -169,7 +169,8 @@ router.post('/image', async (req, res) => {
 
     // Now solve the extracted question
     const prompt = generatePrompt(extractedText, subject);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    // ✅ 修正：gemini-1.5-flash → gemini-2.0-flash-exp
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
