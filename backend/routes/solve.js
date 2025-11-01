@@ -84,7 +84,7 @@ router.post('/text', async (req, res) => {
     const prompt = generatePrompt(question, subject);
 
     // Call Gemini API
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
@@ -144,7 +144,7 @@ router.post('/image', async (req, res) => {
     const base64Data = imageData.replace(/^data:image\/\w+;base64,/, '');
 
     // First, extract text from image
-    const visionModel = genAI.getGenerativeModel({ model: 'gemini-pro-vision' });
+    const visionModel = genAI.getGenerativeModel({ model: 'gemini-pro' });
     
     const imageParts = [
       {
@@ -169,7 +169,7 @@ router.post('/image', async (req, res) => {
 
     // Now solve the extracted question
     const prompt = generatePrompt(extractedText, subject);
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
