@@ -7,6 +7,9 @@ const solveRoutes = require('./routes/solve');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// ✅ この行を追加（trust proxyの設定）
+app.set('trust proxy', 1);
+
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
